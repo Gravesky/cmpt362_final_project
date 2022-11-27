@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+
+    <PreferenceCategory
+        android:layout="@layout/setting_website"
+        android:title="Account Preferences">
+        <Preference
+            app:iconSpaceReserved="false"
+            android:title="Course Webpage"
+            android:key="TO_COURSE"
+            android:icon="@drawable/ic_sfu_flag_70x70"/>
+        <Preference
+            app:iconSpaceReserved="false"
+            android:title="SFU Webpage"
+            android:key="TO_SFU"
+            android:icon="@drawable/ic_sfu_flag_70x70"/>
+        <Preference
+            app:iconSpaceReserved="false"
+            android:title="App Github Webpage"
+            android:key="TO_GITHUB"
+            android:icon="@drawable/ic_github_70x70"/>
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>
+

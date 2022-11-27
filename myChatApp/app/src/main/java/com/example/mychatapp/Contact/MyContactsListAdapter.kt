@@ -1,13 +1,14 @@
-package com.example.mychatapp
+package com.example.mychatapp.Contact
 
 import android.content.Context
 import android.net.Uri
-import android.provider.MediaStore.Images.Media.getBitmap
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.mychatapp.R
+import com.example.mychatapp.Util
 import com.example.mychatapp.data.UserMessages_Database.UserMessages
 import java.io.File
 
@@ -26,7 +27,7 @@ class MyContactsListAdapter(private val context: Context, private var list: List
     }
 
     override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
-        val view = View.inflate(context,R.layout.adapter_contacts_list_layout,null)
+        val view = View.inflate(context, R.layout.adapter_contacts_list_layout,null)
         var imageViewPortrait = view.findViewById<ImageView>(R.id.contactProtrait)
         var textViewName = view.findViewById<TextView>(R.id.contactName)
 
