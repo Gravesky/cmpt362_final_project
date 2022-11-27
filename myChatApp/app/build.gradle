@@ -47,6 +47,7 @@ dependencies {
 
     //Preferences
     implementation 'androidx.preference:preference-ktx:1.2.0'
+    implementation 'androidx.preference:preference:1.2.0'
 
     //Lifecycle
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1"
