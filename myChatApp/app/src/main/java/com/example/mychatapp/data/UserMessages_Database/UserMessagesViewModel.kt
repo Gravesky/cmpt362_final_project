@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewmodel.CreationExtras
 import java.lang.IllegalArgumentException
 
 class UserMessagesViewModel(private val repository: UserMessagesRepository): ViewModel() {
@@ -24,7 +25,7 @@ class UserMessagesViewModel(private val repository: UserMessagesRepository): Vie
 }
 
 class UserMessagesViewModelFactory(private val repository: UserMessagesRepository) : ViewModelProvider.Factory{
-    override fun<T: ViewModel> create(modelClass: Class<T>) : T{
+    override fun<T: ViewModel> create(modelClass: Class<T>,extras: CreationExtras) : T{
         if(modelClass.isAssignableFrom(UserMessagesViewModel::class.java))
             return UserMessagesViewModel(repository) as T
         throw IllegalArgumentException("Unknown ViewModel class")
