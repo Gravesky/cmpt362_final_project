@@ -19,9 +19,13 @@ io.on('connection', (socket) => {
 
     console.log("New socket connection id: " + socket.id)
 
-    // socket.on('counter', () => {
-    //     count++;
-    //     console.log(count)
-    //     io.emit('counter', count);
-    // })
+    socket.on('new message', (msg) => {
+        //TODO: 
+        console.log("New message received: "+msg)
+        socket.broadcast.emit("receive message", msg)
+    })
+
+    socket.on('disconnect', function() {
+        console.log( 'user '+socket.id+' has left ')
+    });
 })
