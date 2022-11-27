@@ -1,12 +1,12 @@
 package com.example.mychatapp
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.example.mychatapp.Chat.ChatHistoryFragment
 import com.example.mychatapp.Contact.ContactsFragment
 import com.example.mychatapp.Setting.SettingFragment
 import com.google.android.material.tabs.TabLayout
@@ -17,8 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     //////////////////////////////////////////////////////////////////
     //写完chat xml和kt之后更换下面两行的注释即可
-    //private lateinit var fragmentChatHistory: ChatHistoryFragment
-    private lateinit var fragmentChatHistory: ContactsFragment
+    private lateinit var fragmentChatHistory: ChatHistoryFragment
     ///////////////////////////////////////////////////////////////////
 
     private lateinit var fragmentContects: ContactsFragment
@@ -38,12 +37,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        ///////////////////////////////////////////////////
-        //写完chat xml和kt之后更换下面两行的注释即可
-        //fragmentChatHistory = ChatHistoryFragment()
-        fragmentChatHistory = ContactsFragment()
-        ///////////////////////////////////////////////////
-
+        fragmentChatHistory = ChatHistoryFragment()
         fragmentContects = ContactsFragment()
         fragmentSetting = SettingFragment()
 
