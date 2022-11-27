@@ -1,4 +1,4 @@
-package com.example.mychatapp.data.UserMessages_Database
+package com.example.mychatapp.data
 
 import android.icu.util.Calendar
 import androidx.room.TypeConverter

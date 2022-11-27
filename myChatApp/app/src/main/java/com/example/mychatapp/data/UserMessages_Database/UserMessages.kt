@@ -9,6 +9,7 @@ import kotlin.collections.ArrayList
 
 
 //This table stores all user's friends' information and message histories between user and his/her friends
+//通讯录数据库
 
 @Entity(tableName = "User_Messages_Table")
 data class UserMessages(
