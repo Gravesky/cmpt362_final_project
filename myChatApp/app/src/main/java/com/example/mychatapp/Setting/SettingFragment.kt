@@ -20,6 +20,11 @@ class SettingFragment: PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.preferences,rootKey)
 
 
+
+
+
+
+
         to_course = findPreference("TO_COURSE")!!
         //to_course.summary = "1111111"
         to_course.setOnPreferenceClickListener {
