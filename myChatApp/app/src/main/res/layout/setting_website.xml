@@ -8,9 +8,9 @@
         android:layout_height="25dp"
         android:layout_marginTop="16dp"
         android:gravity="left"
-        android:text="WebSite"
+        android:text=""
         android:textColor="@color/cobaltGreen"
         android:textStyle="bold"
         android:layout_width="0dp"
-        android:layout_marginLeft="5dp"/>
+        android:layout_margin="5dp"/>
 </LinearLayout>

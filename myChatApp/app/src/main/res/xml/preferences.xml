@@ -4,7 +4,6 @@
 
 
 
-
     <PreferenceCategory
         android:layout="@layout/setting_website"
         android:title="Account Preferences">

@@ -13,6 +13,10 @@ import com.example.mychatapp.Setting.SettingFragment
 import com.example.mychatapp.data.UserMessages_Database.*
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.delay
+import java.util.*
+import kotlin.collections.ArrayList
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -83,35 +87,31 @@ class MainActivity : AppCompatActivity() {
         repository = UserMessagesRepository(databaseDao)
         factory = UserMessagesViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory).get(UserMessagesViewModel::class.java)
-        //因为acc_id不能重复，所以在第一遍运行后需要注释掉后边的代码
-        //TODO:因为acc_id不能重复，所以在第一遍运行后需要注释掉后边的代码
+
         val UserMessagesOne = UserMessages()
-        UserMessagesOne.acc_id = "XCNV_DEFSwdaSA_asefrsd"
-        UserMessagesOne.name = "Ni XX"
+        UserMessagesOne.acc_id = "asdaasd${System.currentTimeMillis()}"
+        UserMessagesOne.name = "iKun 1"
         UserMessagesOne.email = "sfu666@sfu.ca"
         UserMessagesOne.phone = "110120119"
         UserMessagesOne.profile_pic = "res/drawable/sfu_logo.png"
         viewModel.insert(UserMessagesOne)
 
-        val UserMessagesTwo = UserMessages()
-        UserMessagesTwo.acc_id = "XCNV_DEFaasdasXFSA_asefrsd"
-        UserMessagesTwo.name = "ikun"
-        UserMessagesTwo.email = "sfu666@sfu.ca"
-        UserMessagesTwo.phone = "110120119"
-        UserMessagesTwo.profile_pic = "res/drawable/sfu_logo.png"
-        viewModel.insert(UserMessagesTwo)
+        val UserMessages2 = UserMessages()
+        UserMessages2.acc_id = "${System.currentTimeMillis()}asdaasd"
+        UserMessages2.name = "iKun 2"
+        UserMessages2.email = "sfu666@sfu.ca"
+        UserMessages2.phone = "110120119"
+        UserMessages2.profile_pic = "res/drawable/sfu_logo.png"
+        viewModel.insert(UserMessages2)
 
-        val UserMessagesThree = UserMessages()
-        UserMessagesThree.acc_id = "XCNV_D425XFSA_asefrsd"
-        UserMessagesThree.name = "WuErFan"
-        UserMessagesThree.email = "sfu666@sfu.ca"
-        UserMessagesThree.phone = "110120119"
-        UserMessagesThree.profile_pic = "res/drawable/sfu_logo.png"
-        viewModel.insert(UserMessagesThree)
-
+        val UserMessages3 = UserMessages()
+        UserMessages3.acc_id = "poujmnkl${System.currentTimeMillis()}asdaasd"
+        UserMessages3.name = "iKun 3"
+        UserMessages3.email = "sfu666@sfu.ca"
+        UserMessages3.phone = "110120119"
+        UserMessages3.profile_pic = "res/drawable/sfu_logo.png"
+        viewModel.insert(UserMessages3)
 
         ////////////////////////////////////////////////////////////////////
-
-
     }
 }

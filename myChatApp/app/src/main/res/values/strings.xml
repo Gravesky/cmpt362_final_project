@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">myChatApp</string>
+    <string name="cancel">CANCEL</string>
+    <string name="start_chatting">Start Chatting</string>
 </resources>

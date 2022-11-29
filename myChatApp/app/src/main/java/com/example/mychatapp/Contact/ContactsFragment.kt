@@ -57,8 +57,9 @@ class ContactsFragment: Fragment() {
 */
         myListView.setOnItemClickListener {parent,view,position,id->
 
+            val jumpToShow:Intent = Intent(context, ContactActivity::class.java)
 
-
+            startActivity(jumpToShow)
 
         }
 
