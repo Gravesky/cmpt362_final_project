@@ -2,11 +2,12 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-
-    <PreferenceCategory
+    <Preference
         android:layout="@layout/setting_website"
-        android:title="Account Preferences">
+        app:iconSpaceReserved="false"
+        android:title="App Github Webpage"
+        android:key="TO_UserProfile" />
+
         <Preference
             app:iconSpaceReserved="false"
             android:title="Course Webpage"
@@ -23,7 +24,6 @@
             android:key="TO_GITHUB"
             android:icon="@drawable/ic_github_70x70"/>
 
-    </PreferenceCategory>
 
 
 </PreferenceScreen>

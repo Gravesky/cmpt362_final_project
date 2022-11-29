@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--UserProfile-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="50dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgMe"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/sfu_logo"/>
+            <LinearLayout
+                android:layout_toRightOf="@+id/imgMe"
+                android:id="@+id/text_view_Me"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/text_view_Me_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical|left"
+                    android:textSize="18sp"
+                    android:text="AAABBBCCC"/>
+                <TextView
+                    android:id="@+id/text_view_Me_AccID"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical|left"
+                    android:textSize="18sp"
+                    android:text="Acc_ID:AAABBBCCC"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_toRightOf="@+id/text_view_Me"
+                android:layout_width="20dp"
+                android:layout_height="70dp">
+            <ImageView
+                android:id="@+id/imgMe_Arrow"
+                android:gravity="center"
+                android:layout_width="15dp"
+                android:layout_height="50dp"
+                android:src="@drawable/arrow"
+                android:layout_gravity="center_vertical"
+                />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <!--WebSite-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/imgCourseWebPage"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_sfu_flag_70x70" />
+                <TextView
+                    android:id="@+id/textCourseWebPage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="20sp"
+                    android:text="Course WebPage"
+                    android:gravity="center_vertical|left" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/imgSFUWebPage"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_sfu_flag_70x70" />
+                <TextView
+                    android:id="@+id/textSFUWebPage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="20sp"
+                    android:text="SFU WebPage"
+                    android:gravity="center_vertical|left" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/imgGitHubWebPage"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_github_70x70" />
+                <TextView
+                    android:id="@+id/textGitHubWebPage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="20sp"
+                    android:text="App GitHub WebPage"
+                    android:gravity="center_vertical|left" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

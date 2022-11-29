@@ -59,6 +59,7 @@ class ContactsFragment: Fragment() {
 
             val jumpToShow:Intent = Intent(context, ContactActivity::class.java)
 
+
             startActivity(jumpToShow)
 
         }

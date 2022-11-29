@@ -15,15 +15,31 @@
             android:text="Profile Photo:"
             android:textStyle="bold"
             android:textSize="15sp"/>
-        <ImageView
-            android:id="@+id/imageProfile"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/ic_friends_70x70">
-        </ImageView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageProfile"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/ic_friends_70x70">
+            </ImageView>
+
+            <Button
+                android:id="@+id/btnChangePhoto"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="50dp"
+                android:onClick="onChangePhotoClicked"
+                android:background="@color/gray"
+                android:text="CHANGE" />
+        </LinearLayout>
+
 
         <!--Name-->
         <TextView
@@ -81,7 +97,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone Number:"
+            android:hint="Phone Number"
             android:inputType="number"
             android:id ="@+id/editTextPhone"
             android:textStyle="bold"
@@ -116,16 +132,6 @@
                 android:text="@string/cancel" />
         </LinearLayout>
 
-        <!-- Start Chatting-->
-        <Button
-            android:id="@+id/btnStartChat"
-            android:layout_width="260dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="58dp"
-            android:onClick="onStartCHatClicked"
-            android:background="@color/gray"
-            android:text="@string/start_chatting" />
 
     </LinearLayout>
 </ScrollView>
