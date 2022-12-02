@@ -1,131 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+    android:layout_height="match_parent"
+    tools:context=".Contact.ContactActivity">
+
+    <ImageView
+        android:id="@+id/userPhoto"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="30dp"
+        android:background="@drawable/ic_me_70x70"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/userName"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:orientation="vertical" >
-        <TextView
-            android:id ="@+id/text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Profile Photo:"
-            android:textStyle="bold"
-            android:textSize="15sp"/>
-        <ImageView
-            android:id="@+id/imageProfile"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/ic_friends_70x70">
-        </ImageView>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userPhoto"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:layout_marginVertical="20dp"
+        android:text="FirstName LastName"/>
 
-        <!--Name-->
-        <TextView
-            android:id ="@+id/text_Name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Name:"
-            android:textStyle="bold"
-            android:textSize="15sp"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="The Name"
-            android:id ="@+id/editTextName" />
+    <Button
+        android:id="@+id/startChatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="20dp"
+        android:text="Start Chatting！"/>
 
-        <!--Acc_ID-->
-        <TextView
-            android:id ="@+id/text_accid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Acc_ID:"
-            android:textStyle="bold"
-            android:textSize="15sp"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id ="@+id/editTextACCID"
-            android:hint="The Acc_ID"
-            android:clickable="true"
-            android:focusable="false"/>
 
-        <!--Email-->
-        <TextView
-            android:id ="@+id/text_Email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Email:"
-            android:textStyle="bold"
-            android:textSize="15sp"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="The Email"
-            android:inputType="textEmailAddress"
-            android:id ="@+id/editTextEmail" />
 
-        <!--Phone-->
-        <TextView
-            android:id ="@+id/text_Phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Phone:"
-            android:textStyle="bold"
-            android:textSize="15sp"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Phone Number:"
-            android:inputType="number"
-            android:id ="@+id/editTextPhone"
-            android:textStyle="bold"
-            android:textSize="15sp"/>
-
-        <!-- save and cancel-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:orientation="horizontal" >
-
-            <Button
-                android:id="@+id/btnSave"
-                android:layout_width="125dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="50dp"
-                android:onClick="onSaveClicked"
-                android:background="@color/gray"
-                android:text="SAVE" />
-
-            <Button
-                android:id="@+id/btnCancel"
-                android:layout_width="125dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:onClick="onCancelClicked"
-                android:background="@color/gray"
-                android:text="@string/cancel" />
-        </LinearLayout>
-
-        <!-- Start Chatting-->
-        <Button
-            android:id="@+id/btnStartChat"
-            android:layout_width="260dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="58dp"
-            android:onClick="onStartCHatClicked"
-            android:background="@color/gray"
-            android:text="@string/start_chatting" />
-
-    </LinearLayout>
-</ScrollView>
+</RelativeLayout>

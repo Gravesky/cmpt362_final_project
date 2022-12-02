@@ -2,6 +2,7 @@ package com.example.mychatapp.Chat
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,88 +11,110 @@ import android.widget.ListView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.mychatapp.Contact.MyContactsListAdapter
+import com.example.mychatapp.MainActivity
 import com.example.mychatapp.R
+import com.example.mychatapp.auth.SignInActivity
+import com.example.mychatapp.data.ChatHistoryAdapter
 import com.example.mychatapp.data.ChatHistory_Database.*
+import com.example.mychatapp.data.SingleChat
+import com.example.mychatapp.data.SingleMsg
 import com.example.mychatapp.data.UserMessages_Database.*
+import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 
 class  ChatHistoryFragment: Fragment() {
+    companion object {
+        const val TAG = "ChatHistFrag:DEBUG:"
+        const val MESSAGES_CHILD = "messages"
+        const val KEY_GROUP_ID = "groupId"
+    }
 
-    //Database variables
-    private lateinit var database: ChatHistoryDatabase
-    private lateinit var databaseDao: ChatHistoryDatabaseDao
-    private lateinit var repository: ChatHistoryRepository
-    private lateinit var viewModelFactory: ChatHistoryViewModelFactory
-    private lateinit var chatHistoryViewModel: ChatHistoryViewModel
-
-    private lateinit var userMessageDataBase: UserMessagesDatabase
-    private lateinit var userMessageDataBaseDao: UserMessagesDatabaseDao
-    private lateinit var userMessageDataBaseRepository: UserMessagesRepository
-    private lateinit var userViewModelFactory: UserMessagesViewModelFactory
-    private lateinit var userMessageDataBaseViewModel: UserMessagesViewModel
-
-
-    //ListView variables
-    private lateinit var listView: ListView
-    private lateinit var arrayList:ArrayList<ChatHistory>
-    private lateinit var arrayAdapter:MyChatHistoryListAdapter
-
-    private lateinit var view1: View
+    //Firebase variables
+    private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseDatabase
+    private lateinit var myListView: ListView
+    private lateinit var myAdapter: MyChatsListAdapter
+    private lateinit var arrayList: ArrayList<SingleChat>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_chat, container, false)
 
-        //Initialize database variables
-        database = ChatHistoryDatabase.getInstance(requireActivity())
-        databaseDao = database.chatHistoryDatabaseDao
-        repository = ChatHistoryRepository(databaseDao)
-        viewModelFactory = ChatHistoryViewModelFactory(repository)
-        chatHistoryViewModel = ViewModelProvider(this, viewModelFactory).get(ChatHistoryViewModel::class.java)
-
-        //Initialize UserMessage database
-        userMessageDataBase = UserMessagesDatabase.getInstance(requireActivity())
-        userMessageDataBaseDao = userMessageDataBase.userMessagesDatabaseDao
-        userMessageDataBaseRepository = UserMessagesRepository(userMessageDataBaseDao)
-        userViewModelFactory = UserMessagesViewModelFactory(userMessageDataBaseRepository)
-        userMessageDataBaseViewModel = ViewModelProvider(this,userViewModelFactory).get(UserMessagesViewModel::class.java)
-
-        //Initialize ListView variables
-        listView = view.findViewById(R.id.chat_list)
-        arrayList = ArrayList()
-        arrayAdapter = MyChatHistoryListAdapter(requireActivity(), arrayList)
-        listView.adapter = arrayAdapter
-
-
-
-        //Refresh the listview when new message receives(new update on the table)
-        chatHistoryViewModel.allChatHistoryLiveData.observe(requireActivity(), Observer{
-            arrayAdapter.replace(it)
-            arrayAdapter.notifyDataSetChanged()
-            arrayList = it as ArrayList<ChatHistory>
-            listView.adapter = arrayAdapter
-        })
-
-        //Listener for listview
-        listView.setOnItemClickListener { parent, newview, position, id ->
-            /*
-            TODO: 1. get the acc_id of the clicked chat
-                  2. access UserMessages database to get all messages between the user and this friend
-                  3. open the ChatActivity
-             */
-            var chatHistory:ChatHistory = arrayAdapter.getItem(position) as ChatHistory
-            var userID = chatHistory.acc_id
-            //为了在此界面显示每个人名字下面的那一句聊天记录，在这里先访问一次
-            //usermessage数据库
-
-            //text是最后一条聊天记录
-            var message = userMessageDataBaseDao.getUserMessage(userID)
-            //var text = message.message_history.last() as String
-            val intent = Intent(view.context,ChatActivity::class.java)
-            intent.putExtra("userID",userID)
-            //intent.putExtra("lastText",text)
-            startActivity(intent)
+        auth = Firebase.auth
+        if (auth.currentUser != null) {
+            Log.d(TAG,"This fragment has a user authenticated: ${auth.currentUser!!.uid}")
         }
 
+        // Initialize Realtime Database
+        db = Firebase.database
+        db.useEmulator("10.0.2.2",9000)
+        val userRef = db.reference.child(MainActivity.USER_CHILD).child(auth.currentUser!!.uid).child("friends")
+
+        myListView = view.findViewById(R.id.chatHistoryList)
+        arrayList = ArrayList()
+        myAdapter = MyChatsListAdapter(requireActivity(),arrayList)
+        myListView.adapter = myAdapter
+
+        userRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val chatList = ArrayList<SingleChat>()
+                for (postSnapshot in dataSnapshot.children) {
+                    val chatMap = postSnapshot.value as HashMap<*, *>
+                    if (chatMap["groupId"].toString() != "n/a") {
+                        val newChat = SingleChat(
+                            chatMap["groupId"].toString(),
+                            chatMap["userName"].toString()
+                        )
+                        chatList.add(newChat)
+                    }
+
+                }
+                Log.d(TAG, "onDataChange -> $chatList")
+                myAdapter.replace(chatList)
+                myAdapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+                // ...
+            }
+        })
+
+        myListView.setOnItemClickListener { adapterView, view, i, l ->
+            Log.d(TAG,"index at  $i clicked.")
+            val thisChat = myAdapter.getItem(i) as SingleChat
+            val startChatIntent = Intent(requireActivity(),ChatActivity::class.java)
+            startChatIntent.action = ChatActivity.EXIST_CHAT_ACTION
+            startChatIntent.putExtra(KEY_GROUP_ID,thisChat.groupId)
+            startActivity(startChatIntent)
+        }
+
+        Log.d(TAG, "onCreate -> finished")
         return view
+    }
+
+    override fun onPause() {
+        Log.d(TAG,"OnPause called")
+        super.onPause()
+    }
+
+    override fun onResume() {
+        Log.d(TAG,"onResume called")
+        super.onResume()
+        myAdapter.notifyDataSetChanged()
+        // ref: https://stackoverflow.com/questions/71665925/error-inconsistency-detected-invalid-view-holder-adapter-position-myviewholder
+
     }
 
 }

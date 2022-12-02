@@ -1,7 +1,9 @@
 package com.example.mychatapp.Contact
 
 import android.content.Intent
+import android.nfc.Tag
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +11,19 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.mychatapp.MainActivity
 import com.example.mychatapp.R
+import com.example.mychatapp.data.User
 import com.example.mychatapp.data.UserMessages_Database.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 
 class ContactsFragment: Fragment() {
 
@@ -25,8 +38,18 @@ class ContactsFragment: Fragment() {
     private lateinit var myAdapter: MyContactsListAdapter
     private lateinit var arrayList: ArrayList<UserMessages>
 
+    //Firebase variables
+    private lateinit var db: FirebaseDatabase
+    private lateinit var friends:HashMap<String, Any>
+    private lateinit var friendList: ArrayList<String>
+
 
     private lateinit var view1: View
+
+    companion object {
+        const val TAG = "ContactsFragment:DEBUG:"
+        const val KEY_USER_ID = "userId"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,41 +58,59 @@ class ContactsFragment: Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_contacts, container, false)
 
+        db = Firebase.database
+        db.useEmulator("10.0.2.2", 9000)
+        val userRef = db.reference.child(MainActivity.USER_CHILD).child(Firebase.auth.currentUser?.uid.toString()).child("friends")
+
         myListView = view.findViewById(R.id.runHistoryListView)
-        database =  UserMessagesDatabase.getInstance(requireActivity())
-        databaseDao = database.userMessagesDatabaseDao
-        repository = UserMessagesRepository(databaseDao)
-        factory = UserMessagesViewModelFactory(repository)
-        viewModel = ViewModelProvider(requireActivity(), factory).get(UserMessagesViewModel::class.java)
 
-        arrayList = ArrayList()
-        myAdapter = MyContactsListAdapter(requireActivity(),arrayList)
-        myListView.adapter = myAdapter
+        //TODO: create a listener reading /users/$uid/friends in the realtime database
+        val userListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                //TODO: Get the friends list of the current user
+                val user = snapshot.getValue<HashMap<String, Any>>()
+                if (user != null){
+                    friends = user
 
-        viewModel.allUserMessagesLiveData.observe(requireActivity()){
-            println("debug: loading historyList")
-            myAdapter.replaceList(it)
-            println("debug: loading historyList2")
-            myAdapter.notifyDataSetChanged()
-            println("debug: loading historyList3")
+                    friendList = ArrayList()
+
+                    // TODO: Thread
+                    for(item in friends){
+                        friendList.add(item.key)
+                    }
+
+
+                    //TODO: use list adapter to generate the listview
+                    myAdapter = MyContactsListAdapter(requireActivity(),friendList)
+                    myListView.adapter = myAdapter
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
         }
-/*
-*/
-        myListView.setOnItemClickListener {parent,view,position,id->
 
-            val jumpToShow:Intent = Intent(context, ContactActivity::class.java)
+        userRef.addValueEventListener(userListener)
 
-
-            startActivity(jumpToShow)
-
+        //TODO: Generate the listview
+//
+//
+        
+        myListView.setOnItemClickListener { adapterView, view, i, l ->
+            val thisUserId = myAdapter.getItem(i) as String
+            Log.d(TAG,"clicked uid = $thisUserId")
+            val myContactIntent = Intent(this.requireContext(),ContactActivity::class.java)
+            myContactIntent.putExtra(KEY_USER_ID,thisUserId)
+            startActivity(myContactIntent)
         }
 
         return view
     }
 
-    override fun onResume() {
-        super.onResume()
-        myAdapter.notifyDataSetChanged()
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        myAdapter.notifyDataSetChanged()
+//    }
 
 }
