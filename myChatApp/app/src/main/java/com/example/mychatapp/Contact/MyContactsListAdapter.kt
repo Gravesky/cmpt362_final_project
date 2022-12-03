@@ -23,10 +23,10 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.io.File
 
-//Firebase variables
-private lateinit var db: FirebaseDatabase
-
 class MyContactsListAdapter(private val context: Context, private var list: ArrayList<String>): BaseAdapter() {
+    //Firebase variables
+    private lateinit var db: FirebaseDatabase
+
 
     override fun getItem(position: Int): Any {
         return list.get(position)
