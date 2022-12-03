@@ -94,8 +94,8 @@ class MyContactsListAdapter(private val context: Context, private var list: Arra
         return view
     }
 
-    fun replaceList(newList:List<UserMessages>){
-        //list = newList
+    fun replace(newList:ArrayList<String>){
+        list = newList
     }
 
 //    fun getTheId(position: Int): String {

@@ -63,27 +63,25 @@ class ContactsFragment: Fragment() {
         val userRef = db.reference.child(MainActivity.USER_CHILD).child(Firebase.auth.currentUser?.uid.toString()).child("friends")
 
         myListView = view.findViewById(R.id.runHistoryListView)
+        friendList = ArrayList()
+        myAdapter = MyContactsListAdapter(requireActivity(),friendList)
+        myListView.adapter = myAdapter
 
         //TODO: create a listener reading /users/$uid/friends in the realtime database
         val userListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+
                 //TODO: Get the friends list of the current user
-                val user = snapshot.getValue<HashMap<String, Any>>()
-                if (user != null){
-                    friends = user
-
-                    friendList = ArrayList()
-
-                    // TODO: Thread
-                    for(item in friends){
-                        friendList.add(item.key)
-                    }
-
-
-                    //TODO: use list adapter to generate the listview
-                    myAdapter = MyContactsListAdapter(requireActivity(),friendList)
-                    myListView.adapter = myAdapter
+                friendList = ArrayList()
+                for(friend in snapshot.children){
+                    friendList.add(friend.key!!)
                 }
+
+                //TODO: use list adapter to generate the listview
+                myAdapter.replace(friendList)
+                myAdapter.notifyDataSetChanged()
+                //myListView.adapter = myAdapter
+
             }
 
             override fun onCancelled(error: DatabaseError) {
