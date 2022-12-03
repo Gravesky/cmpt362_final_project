@@ -34,6 +34,11 @@ class MyChatsListAdapter(private val context: Context, private var list: ArrayLi
 
         textViewName.text = list[position].userName
 
+        /*TODO: 创建一个onDataChange来更新lastmessage
+                1. 用list的groupid访问message的database
+                2. onDataChange message里面相应的groupid
+        */
+
         return view
     }
 
