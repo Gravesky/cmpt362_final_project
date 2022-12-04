@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <ImageView
-        android:id="@+id/imageUserProfile"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:src="@drawable/ic_friends_70x70">
-    </ImageView>
-</RelativeLayout>
+    <TextView
+        android:id="@+id/ap"
+        android:layout_weight="12"
+        android:layout_height="25dp"
+        android:layout_marginTop="16dp"
+        android:gravity="left"
+        android:text="WebSite"
+        android:textColor="@color/cobaltGreen"
+        android:textStyle="bold"
+        android:layout_width="0dp"
+        android:layout_marginLeft="5dp"/>
+</LinearLayout>

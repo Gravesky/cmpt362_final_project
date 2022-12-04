@@ -25,7 +25,7 @@ class UserMessagesViewModel(private val repository: UserMessagesRepository): Vie
 }
 
 class UserMessagesViewModelFactory(private val repository: UserMessagesRepository) : ViewModelProvider.Factory{
-    override fun<T: ViewModel> create(modelClass: Class<T>,extras: CreationExtras) : T{
+    override fun<T: ViewModel> create(modelClass: Class<T>) : T{
         if(modelClass.isAssignableFrom(UserMessagesViewModel::class.java))
             return UserMessagesViewModel(repository) as T
         throw IllegalArgumentException("Unknown ViewModel class")
