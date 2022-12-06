@@ -6,33 +6,63 @@
     android:layout_height="match_parent"
     tools:context=".Contact.ContactActivity">
 
-    <ImageView
-        android:id="@+id/userPhoto"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_margin="30dp"
-        android:background="@drawable/ic_me_70x70"
-        android:layout_centerHorizontal="true"/>
-
-    <TextView
-        android:id="@+id/userName"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/userPhoto"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        android:layout_marginVertical="20dp"
-        android:text="FirstName LastName"/>
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/startChatButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/userName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginVertical="20dp"
-        android:text="Start Chatting！"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/userPhoto"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="30dp"
+                android:src="@drawable/ic_me_70x70"/>
 
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/userPhoto"
+                android:textAlignment="center"
+                android:textSize="20dp"
+                android:layout_marginVertical="20dp"
+                android:text="FirstName LastName"/>
 
+            <TextView
+                android:id="@+id/userEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/userName"
+                android:textAlignment="center"
+                android:textSize="15dp"
+                android:text="example.com"
+                android:layout_marginVertical="15dp"/>
 
+            <TextView
+                android:id="@+id/userPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/userEmail"
+                android:textAlignment="center"
+                android:textSize="15dp"
+                android:text="(000)-000-0000"
+                android:layout_marginVertical="15dp"/>
+
+            <Button
+                android:id="@+id/startChatButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/userPhone"
+                android:layout_centerHorizontal="true"
+                android:layout_marginVertical="20dp"
+                android:text="Start Chatting！"/>
+        </RelativeLayout>
+
+    </ScrollView>
 </RelativeLayout>

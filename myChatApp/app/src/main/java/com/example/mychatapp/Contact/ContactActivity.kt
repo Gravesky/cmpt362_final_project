@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.mychatapp.Chat.ChatActivity
 import com.example.mychatapp.MainActivity
 import com.example.mychatapp.R
+import com.example.mychatapp.Util
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -25,12 +27,16 @@ class ContactActivity : AppCompatActivity() {
 
         thisUserId = intent.getStringExtra(ContactsFragment.KEY_USER_ID).toString()
         Log.d(TAG,"OnCreate called - with uid = $thisUserId")
+
         val startChatButton = findViewById<Button>(R.id.startChatButton)
         val userNameText = findViewById<TextView>(R.id.userName)
+        val userEmailText = findViewById<TextView>(R.id.userEmail)
+        val userPhoneText = findViewById<TextView>(R.id.userPhone)
+        val userPhotoImage = findViewById<ImageView>(R.id.userPhoto)
 
         // Get user data from db
         db = Firebase.database
-        db.useEmulator("10.0.2.2",9000)
+//        db.useEmulator("10.0.2.2",9000)
 
         // Set onSuccess callback for retrieving use data
         db.reference.child(MainActivity.USER_CHILD).child(thisUserId).get().addOnSuccessListener {
@@ -40,6 +46,18 @@ class ContactActivity : AppCompatActivity() {
                     "userName" -> {
                         Log.d(TAG,"This child is ${child.key}")
                         userNameText.text = child.value.toString()
+                    }
+                    "userEmail" -> {
+                        Log.d(TAG,"This child is ${child.key}")
+                        userEmailText.text = child.value.toString()
+                    }
+                    "userPhone" -> {
+                        Log.d(TAG,"This child is ${child.key}")
+                        userPhoneText.text = child.value.toString()
+                    }
+                    "photoUrl" -> {
+                        Log.d(TAG,"This child is ${child.key}")
+                        Util.loadImageIntoView(userPhotoImage,child.value.toString())
                     }
                     else -> {
                         Log.d(TAG,"This child is ${child.key}")

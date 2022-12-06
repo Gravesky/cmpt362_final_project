@@ -58,7 +58,7 @@ class MyContactsListAdapter(private val context: Context, private var list: Arra
 
         //Initialize database variable
         db = Firebase.database
-        db.useEmulator("10.0.2.2", 9000)
+//        db.useEmulator("10.0.2.2", 9000)
 
         //Get the friend's information
         val friendRef = db.reference.child(MainActivity.USER_CHILD).child(list[position])
@@ -68,6 +68,11 @@ class MyContactsListAdapter(private val context: Context, private var list: Arra
                 val friend = snapshot.getValue<User>()
 
                 textViewName.text = friend?.userName
+
+                val photoUrl = friend?.photoUrl
+                if (photoUrl != null && photoUrl != "null") {
+                    Util.loadImageIntoView(imageViewPortrait,photoUrl)
+                }
 
 //                //TODO: get the image and set the profile pic!!!
 //                val link = friend?.photoUrl

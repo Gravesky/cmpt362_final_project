@@ -59,7 +59,7 @@ class ContactsFragment: Fragment() {
         val view = inflater.inflate(R.layout.fragment_contacts, container, false)
 
         db = Firebase.database
-        db.useEmulator("10.0.2.2", 9000)
+//        db.useEmulator("10.0.2.2", 9000)
         val userRef = db.reference.child(MainActivity.USER_CHILD).child(Firebase.auth.currentUser?.uid.toString()).child("friends")
 
         myListView = view.findViewById(R.id.runHistoryListView)
@@ -106,9 +106,9 @@ class ContactsFragment: Fragment() {
         return view
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        myAdapter.notifyDataSetChanged()
-//    }
+    override fun onResume() {
+        super.onResume()
+        myListView.adapter = myAdapter
+    }
 
 }

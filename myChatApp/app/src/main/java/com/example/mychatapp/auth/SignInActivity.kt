@@ -32,7 +32,7 @@ class SignInActivity : AppCompatActivity() {
             if (it.resultCode == RESULT_OK) {
                 Log.d(TAG, "Sign in successful!")
                 db = Firebase.database
-                db.useEmulator("10.0.2.2", 9000)
+//                db.useEmulator("10.0.2.2", 9000)
                 // TODO: send user information to realtime database
                 pushNewUser()
 
@@ -73,17 +73,12 @@ class SignInActivity : AppCompatActivity() {
                     Log.d(TAG,"user does not exist")
                     val friends = HashMap<String, Any>() // store uid as both key and value
                     val groups = ArrayList<String>()// store uid as both key and value
-                    val userInfo = User(userId, user.displayName, ServerValue.TIMESTAMP, friends , groups, user.photoUrl.toString())
+                    val userInfo = User(userId, user.displayName, user.email, ServerValue.TIMESTAMP, friends , groups, user.photoUrl.toString())
 
                     user.uid.let { it1 -> userRef.child(it1).setValue(userInfo) }
                 }
             }
         }
-
-    }
-
-    private fun userIsExist(){
-
     }
 
     // Firebase instance variables

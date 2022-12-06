@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/root_message"
     android:layout_margin="10dp">
 
     <ImageView
@@ -29,6 +30,16 @@
         app:layout_constraintStart_toStartOf="@id/messageImageView"
         app:layout_constraintTop_toBottomOf="@id/messageImageView"
         tools:text="FirstName LastName" />
+
+    <TextView
+        android:id="@+id/messageTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="time"
+        app:layout_constraintBottom_toBottomOf="@+id/messengerTextView"
+        app:layout_constraintEnd_toEndOf="@+id/root_message"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/messengerTextView" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/messengerImageView"

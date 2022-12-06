@@ -8,21 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.mychatapp.Contact.MyContactsListAdapter
 import com.example.mychatapp.MainActivity
 import com.example.mychatapp.R
-import com.example.mychatapp.auth.SignInActivity
-import com.example.mychatapp.data.ChatHistoryAdapter
-import com.example.mychatapp.data.ChatHistory_Database.*
 import com.example.mychatapp.data.SingleChat
-import com.example.mychatapp.data.SingleMsg
-import com.example.mychatapp.data.UserMessages_Database.*
-import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -30,7 +18,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
 class  ChatHistoryFragment: Fragment() {
@@ -57,7 +44,7 @@ class  ChatHistoryFragment: Fragment() {
 
         // Initialize Realtime Database
         db = Firebase.database
-        db.useEmulator("10.0.2.2",9000)
+//        db.useEmulator("10.0.2.2",9000)
         val userRef = db.reference.child(MainActivity.USER_CHILD).child(auth.currentUser!!.uid).child("friends")
 
         myListView = view.findViewById(R.id.chatHistoryList)
@@ -69,15 +56,16 @@ class  ChatHistoryFragment: Fragment() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val chatList = ArrayList<SingleChat>()
                 for (postSnapshot in dataSnapshot.children) {
+                    val listenerId = postSnapshot.key
                     val chatMap = postSnapshot.value as HashMap<*, *>
                     if (chatMap["groupId"].toString() != "n/a") {
                         val newChat = SingleChat(
                             chatMap["groupId"].toString(),
-                            chatMap["userName"].toString()
+                            chatMap["userName"].toString(),
+                            listenerId,
                         )
                         chatList.add(newChat)
                     }
-
                 }
                 Log.d(TAG, "onDataChange -> $chatList")
                 myAdapter.replace(chatList)
@@ -109,12 +97,15 @@ class  ChatHistoryFragment: Fragment() {
         super.onPause()
     }
 
+    override fun onStart() {
+        Log.d(TAG,"onStart called")
+        super.onStart()
+    }
+
     override fun onResume() {
         Log.d(TAG,"onResume called")
         super.onResume()
-        myAdapter.notifyDataSetChanged()
-        // ref: https://stackoverflow.com/questions/71665925/error-inconsistency-detected-invalid-view-holder-adapter-position-myviewholder
-
+        myListView.adapter = myAdapter
     }
 
 }

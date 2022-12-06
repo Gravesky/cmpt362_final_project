@@ -1,5 +1,6 @@
 package com.example.mychatapp
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -16,6 +17,7 @@ import com.example.mychatapp.Contact.ContactsFragment
 import com.example.mychatapp.Setting.SettingFragment
 import com.example.mychatapp.auth.SignInActivity
 import com.example.mychatapp.data.UserMessages_Database.*
+import com.example.mychatapp.services.Notification
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -33,6 +35,8 @@ class MainActivity : AppCompatActivity() {
         const val MESSAGES_CHILD = "messages"
         const val GROUP_CHILD = "groups"
         const val USER_CHILD = "users"
+        //Notification variable
+        lateinit var myIntent : Intent
     }
 
     //Fragment Variables
@@ -73,11 +77,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // REMOVE OR DISABLE THIS
-        if (BuildConfig.DEBUG) {
+        /*if (BuildConfig.DEBUG) {
             Firebase.database.useEmulator("10.0.2.2", 9000)
             Firebase.auth.useEmulator("10.0.2.2", 9099)
             Firebase.storage.useEmulator("10.0.2.2", 9199)
-        }
+        }*/
 
         // Initialize Firebase Auth and check if the user is signed in
         auth = Firebase.auth
@@ -150,6 +154,15 @@ class MainActivity : AppCompatActivity() {
 
         ////////////////////////////////////////////////////////////////////
 
+        //Start Message Notificatin Service
+        println("debug: about to start the service")
+        if(auth.currentUser != null){
+            println("debug: service started")
+            myIntent = Intent(this, Notification::class.java)
+            startService(myIntent)
+        }
+
+
 
     }
 
@@ -161,6 +174,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, SignInActivity::class.java))
             finish()
             return
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if(auth.currentUser != null){
+            stopService(myIntent)
         }
     }
 
@@ -186,6 +206,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun signOut() {
+        stopService(myIntent)
         AuthUI.getInstance().signOut(this)
         val signOutIntent = Intent(this, SignInActivity::class.java)
         signOutIntent.action = "SignOut"
