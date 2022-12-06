@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
-import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -15,10 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mychatapp.MainActivity
 import com.example.mychatapp.R
-import com.example.mychatapp.Setting.UserProfileActivity
 import com.example.mychatapp.Util
 import com.example.mychatapp.data.Group
-import com.example.mychatapp.data.SingleMessage
 import com.example.mychatapp.data.SingleMsg
 import com.example.mychatapp.data.SingleMsgAdapter
 import com.example.mychatapp.tool.MyButtonObserver

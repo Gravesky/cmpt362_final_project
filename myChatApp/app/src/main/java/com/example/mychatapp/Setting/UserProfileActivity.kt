@@ -112,7 +112,7 @@ class UserProfileActivity : AppCompatActivity() {
                 thisUserRef.child("userPhone").setValue(userPhoneEditText.text.toString()).addOnSuccessListener {
                     Log.d(TAG,"userPhone has been successfully updated to ${userPhoneEditText.text}")
                 }
-                // No need to update auth for phone number, as we do not use phone number.
+                // No need to update auth for phone number in auth, as we do not use phone number to authenticate.
             }
 
             // save & upload the image
