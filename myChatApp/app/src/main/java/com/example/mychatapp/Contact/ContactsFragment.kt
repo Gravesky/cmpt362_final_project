@@ -13,30 +13,18 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.mychatapp.MainActivity
 import com.example.mychatapp.R
-import com.example.mychatapp.data.User
-import com.example.mychatapp.data.UserMessages_Database.*
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
 class ContactsFragment: Fragment() {
 
-    //////////////////////////////临时设置DataBase，UI测试代码/////////////
-    private lateinit var database: UserMessagesDatabase
-    private lateinit var databaseDao: UserMessagesDatabaseDao
-    private lateinit var repository: UserMessagesRepository
-    private lateinit var viewModel: UserMessagesViewModel
-    private lateinit var factory: UserMessagesViewModelFactory
-    ////////////////////////////////////////////////////////////////////
     private lateinit var myListView: ListView
     private lateinit var myAdapter: MyContactsListAdapter
-    private lateinit var arrayList: ArrayList<UserMessages>
 
     //Firebase variables
     private lateinit var db: FirebaseDatabase

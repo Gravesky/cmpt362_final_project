@@ -16,7 +16,6 @@ import com.example.mychatapp.Chat.ChatHistoryFragment
 import com.example.mychatapp.Contact.ContactsFragment
 import com.example.mychatapp.Setting.SettingFragment
 import com.example.mychatapp.auth.SignInActivity
-import com.example.mychatapp.data.UserMessages_Database.*
 import com.example.mychatapp.services.Notification
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.tabs.TabLayout
@@ -55,16 +54,6 @@ class MainActivity : AppCompatActivity() {
     private val TAB_ICON = listOf<Int>(R.drawable.ic_chat_70x70, R.drawable.ic_friends_70x70, R.drawable.ic_me_70x70)
 
     private lateinit var  fragmentTransaction: FragmentTransaction
-
-
-
-    //////////////////////////////临时设置DataBase，UI测试代码/////////////
-    private lateinit var database: UserMessagesDatabase
-    private lateinit var databaseDao: UserMessagesDatabaseDao
-    private lateinit var repository: UserMessagesRepository
-    private lateinit var viewModel: UserMessagesViewModel
-    private lateinit var factory: UserMessagesViewModelFactory
-    ////////////////////////////////////////////////////////////////////
 
     //////////////////////////////FireBase代碼//////////////////////////
     private lateinit var auth: FirebaseAuth

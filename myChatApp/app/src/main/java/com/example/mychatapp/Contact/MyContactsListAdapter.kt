@@ -11,8 +11,6 @@ import com.example.mychatapp.MainActivity
 import com.example.mychatapp.R
 import com.example.mychatapp.Util
 import com.example.mychatapp.data.User
-import com.example.mychatapp.data.UserMessages_Database.UserMessages
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
