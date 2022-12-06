@@ -12,13 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:text="Please type your friend's username:"/>
+        android:text="Please type your friend's email:"/>
 
     <EditText
         android:id="@+id/addContactUserInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Type username here !"
+        android:hint="Type email address here !"
         android:inputType="text"
         android:minHeight="48dp"
         android:autofillHints="username" />

@@ -2,7 +2,9 @@ package com.example.mychatapp
 
 import android.content.Context
 import android.content.Intent
+import android.nfc.Tag
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -31,11 +33,13 @@ import com.google.firebase.storage.ktx.storage
 class MainActivity : AppCompatActivity() {
 
     companion object{
+        const val TAG = "MainActivity:DEBUG:"
         const val MESSAGES_CHILD = "messages"
         const val GROUP_CHILD = "groups"
         const val USER_CHILD = "users"
         //Notification variable
         lateinit var myIntent : Intent
+        var isSet = false
     }
 
     //Fragment Variables
@@ -71,6 +75,12 @@ class MainActivity : AppCompatActivity() {
             Firebase.auth.useEmulator("10.0.2.2", 9099)
             Firebase.storage.useEmulator("10.0.2.2", 9199)
         }*/
+        // Off-line feature
+        if(!isSet) { // Set persistence can only be called once!
+            Log.d(TAG,"Calling database to set persistence !")
+            Firebase.database.setPersistenceEnabled(true)
+            isSet = true
+        }
 
         // Initialize Firebase Auth and check if the user is signed in
         auth = Firebase.auth
@@ -150,8 +160,6 @@ class MainActivity : AppCompatActivity() {
             myIntent = Intent(this, Notification::class.java)
             startService(myIntent)
         }
-
-
 
     }
 

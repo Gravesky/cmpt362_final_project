@@ -65,6 +65,9 @@ class MyChatsListAdapter(private val context: Context, private var list: ArrayLi
                     Log.d(TAG,"Got the photo URL for this listener: $it")
                     Util.loadImageIntoView(imageViewPortrait,it.value.toString())
                 }
+                else{
+                    imageViewPortrait.setImageResource(R.drawable.ic_me)
+                }
             }
             else {
                 Log.d(TAG,"Nothing found! This listener does not have portrait photo.")

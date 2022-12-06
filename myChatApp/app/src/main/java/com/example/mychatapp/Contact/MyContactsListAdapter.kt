@@ -43,17 +43,6 @@ class MyContactsListAdapter(private val context: Context, private var list: Arra
         val imageViewPortrait = view.findViewById<ImageView>(R.id.contactProtrait)
         val textViewName = view.findViewById<TextView>(R.id.contactName)
 
-        ///////////////////////////////////////////////////////////////
-        // TODO:
-        //      目前无法显示图像，不知道照片的位置和存储的链接的类型
-        //var path = list.get(position).profile_pic
-        //val file=File(path)
-        //val imgUri = Uri.fromFile(file)
-        //val bitmap = Util.getBitmap(context, imgUri)
-        //imageViewPortrait.setImageBitmap(bitmap)
-        imageViewPortrait.setImageResource(R.drawable.sfu_logo)
-        ///////////////////////////////////////////////////////////////
-
         //Initialize database variable
         db = Firebase.database
 //        db.useEmulator("10.0.2.2", 9000)
@@ -70,6 +59,9 @@ class MyContactsListAdapter(private val context: Context, private var list: Arra
                 val photoUrl = friend?.photoUrl
                 if (photoUrl != null && photoUrl != "null") {
                     Util.loadImageIntoView(imageViewPortrait,photoUrl)
+                }
+                else{
+                    imageViewPortrait.setImageResource(R.drawable.ic_me)
                 }
 
 //                //TODO: get the image and set the profile pic!!!

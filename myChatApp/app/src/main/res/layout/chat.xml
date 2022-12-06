@@ -47,7 +47,6 @@
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_marginBottom="15dp"
-        android:src="@drawable/ic_me_70x70"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/messengerTextView"
         app:layout_constraintStart_toStartOf="parent" />
