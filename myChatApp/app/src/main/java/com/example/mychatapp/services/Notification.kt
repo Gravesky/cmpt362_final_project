@@ -91,16 +91,18 @@ class Notification : Service() {
                 val groupId = group
 
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val message = snapshot.value as HashMap<String, Any>
+                    if(snapshot.value != null) {
+                        val message = snapshot.value as HashMap<String, Any>
 
-                    if(!isThisFirst){ //User isn't JUST logged in
-                        if(groupId != ChatActivity.groupId) { //If the groupId of the new message is not equal to the current groupId of the chatActivity
-                            displayNotification(
-                                groupId as String,
-                                message["speakerId"] as String,
-                                message["userName"] as String,
-                                message["message"] as String
-                            )
+                        if (!isThisFirst) { //User isn't JUST logged in
+                            if (groupId != ChatActivity.groupId) { //If the groupId of the new message is not equal to the current groupId of the chatActivity
+                                displayNotification(
+                                    groupId as String,
+                                    message["speakerId"] as String,
+                                    message["userName"] as String,
+                                    message["message"] as String
+                                )
+                            }
                         }
                     }
                     isThisFirst = false
