@@ -29,5 +29,7 @@ This is a chat application on Android Platform.
 
 ## APP Screenshots
 <p align="middle">
-  <img src="https://ibb.co/9w3MDx3" width="300">
+  <img src="https://cdn.discordapp.com/attachments/1042304497969537064/1049957441602846780/Screenshot_2022-12-06-23-55-40-135_com.example.mychatapp.jpg" width="300">
+  <img src="https://cdn.discordapp.com/attachments/1042304497969537064/1049957441854525460/Screenshot_2022-12-06-23-54-40-010_com.example.mychatapp.jpg" width="300">
+  <img src="https://cdn.discordapp.com/attachments/1042304497969537064/1049957442039058513/Screenshot_2022-12-06-23-54-24-933_com.example.mychatapp.jpg" width="300">
 </p>
