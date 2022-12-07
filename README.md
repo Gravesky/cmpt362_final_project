@@ -1,5 +1,7 @@
 # cmpt362_final_project
 This is a chat application on Android Platform.
+## Video Link
+- [Demo](https://youtu.be/xm6RgVUYRxo)
 ## Acknowledgements
 - [Firebase](https://firebase.google.com/codelabs/firebase-android#0)
 
