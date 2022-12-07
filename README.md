@@ -6,7 +6,7 @@ This is a chat application on Android Platform.
 ## Authors
 - [ZejiaCZJ](https://github.com/ZejiaCZJ)
 - [wzqiao](https://github.com/wzqiao)
-- [Kaikun0731](https://github.com/Kaikun0731）
+- [Kaikun0731](https://github.com/Kaikun0731)
 - [Gravesky](https://github.com/Gravesky)
 
 ## Work Distribution
