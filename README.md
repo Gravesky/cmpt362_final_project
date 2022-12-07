@@ -1,7 +1,7 @@
 # cmpt362_final_project
 This is a chat application on Android Platform.
 ## Acknowledgements
-- [Firebase](https://firebase.google.com/)</li>
+- [Firebase](https://firebase.google.com/codelabs/firebase-android#0)
 
 ## Authors
 - [ZejiaCZJ](https://github.com/ZejiaCZJ)
