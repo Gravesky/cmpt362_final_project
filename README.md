@@ -28,3 +28,6 @@ This is a chat application on Android Platform.
   - Jialong Qiao
 
 ## APP Screenshots
+<p align="middle">
+  <img src="https://ibb.co/9w3MDx3" width="300">
+</p>
