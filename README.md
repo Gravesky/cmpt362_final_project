@@ -10,16 +10,16 @@ This is a chat application on Android Platform.
 - [Gravesky](https://github.com/Gravesky)
 
 ## Work Distribution
--BackEnd
+### BackEnd
   - Firebase Server:
     - Handi Yang, Zejia Cai
 - Client Backend Database Interaction:
   - Handi Yang, Zejia Cai
 - Notification Service:
   - Zejia Cai
-- FrontEnd UI
-  - ChatFragment / ChatActivity
-    <br>Jialong Qiao, Handi Yang
+### FrontEnd UI
+- ChatFragment / ChatActivity
+  - Jialong Qiao, Handi Yang
 - ContactsFragment /ContactActivity
   - Kaikun Fang, Zejia Cai
 - SettingFragment/UserProfileActivity
